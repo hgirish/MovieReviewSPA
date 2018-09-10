@@ -18,7 +18,7 @@ namespace MovieReviewSPA.Data
             this.dbContext = dbContext ?? throw new ArgumentNullException("dbContext");
             DbSet = this.dbContext.Set<T>();
         }
-        public void Add(T entity)
+        public T Add(T entity)
         {
             EntityEntry<T> entityEntry = dbContext.Entry(entity);
             if (entityEntry.State != EntityState.Detached)
@@ -29,6 +29,7 @@ namespace MovieReviewSPA.Data
             {
                 DbSet.Add(entity);
             }
+            return entity;
         }
 
         public void Delete(T entity)

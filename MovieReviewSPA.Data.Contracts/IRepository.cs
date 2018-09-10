@@ -11,7 +11,7 @@ namespace MovieReviewSPA.Data.Contracts
 
         T GetById(int id);
 
-        void Add(T entity);
+        T Add(T entity);
 
         void Update(T entity);
 

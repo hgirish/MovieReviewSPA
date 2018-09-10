@@ -42,11 +42,11 @@ namespace MovieReviewSPA.web.Controllers.API
 
         // POST: api/Movies
         [HttpPost]
-        public HttpResponseMessage Post([FromBody] Movie movie)
+        public IActionResult Post([FromBody] Movie movie)
         {
-            _uow.Movies.Add(movie);
+           movie = _uow.Movies.Add(movie);
             _uow.Commit();
-            return new HttpResponseMessage(System.Net.HttpStatusCode.NoContent);
+            return Ok(movie);
         }
 
         // PUT: api/Movies/5
