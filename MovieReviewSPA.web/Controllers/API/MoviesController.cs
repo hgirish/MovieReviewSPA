@@ -45,7 +45,7 @@ namespace MovieReviewSPA.web.Controllers.API
         [HttpPost]
         public IActionResult Post([FromBody] Movie movie)
         {
-            throw new Exception("Some Exception");
+            
            movie = _uow.Movies.Add(movie);
             _uow.Commit();
             return Ok(movie);
@@ -53,7 +53,7 @@ namespace MovieReviewSPA.web.Controllers.API
 
         // PUT: api/Movies/5
         [HttpPut("{id}")]
-        public HttpResponseMessage Put(int id, [FromBody] Movie movie)
+        public IActionResult Put(int id, [FromBody] Movie movie)
         {
             //using (StreamReader reader = new StreamReader(Request.Body, Encoding.UTF8))
             //{
@@ -62,7 +62,7 @@ namespace MovieReviewSPA.web.Controllers.API
             //}
             _uow.Movies.Update(movie);
             _uow.Commit();
-            return new HttpResponseMessage(System.Net.HttpStatusCode.NoContent);
+            return Ok(movie);
         }
 
         // DELETE: api/ApiWithActions/5

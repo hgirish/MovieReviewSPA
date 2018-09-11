@@ -4,7 +4,7 @@ import { MoviesService } from '../../services/movies.service';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-
+import * as Raven from 'raven-js'
 @Component({
   selector: 'app-new-movie',
   templateUrl: './new-movie.component.html',
@@ -35,6 +35,7 @@ export class NewMovieComponent implements OnInit {
           this.toastr.error('ERROR occured ')
         }
       }, err => {
+       // Raven.captureException(err.ogirinalError || err);
         this.toastr.error(`An unexpected error occured while creating new movie! ${err}`,'Error')
       });
    

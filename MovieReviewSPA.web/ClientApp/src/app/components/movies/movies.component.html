@@ -16,6 +16,11 @@
                 <i class="glyphicon glyphicon-user"></i> Director Name: {{m.directorName}}
                 <br />
                 <span class="explore"><i class="glyphicon glyphicon-th"></i> <a href="#">Movie Reviews: {{m.noOfReviews}}</a></span>
+                <span class=" btn btn-primary"><a [routerLink]="['/movies/',m.id]" style="color: black"><i class="glyphicon glyphicon-edit"></i> Edit Movie </a></span>
+                <button class="btn btn-danger" style="color:black" type="button"
+                        (click)="delete(m.id)">
+                  <i class="glyphicon glyphicon-remove"></i> Delete Movie
+                </button>
               </small>
             </div>
           </div>

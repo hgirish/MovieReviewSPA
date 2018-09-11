@@ -6,11 +6,13 @@ import { HomeComponent } from './home/home.component';
 import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { NewMovieComponent } from './components/new-movie/new-movie.component';
+import { EditMovieComponent } from './components/edit-movie/edit-movie.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'movies', component: MoviesComponent },
   { path: 'movies/new', component: NewMovieComponent },
+  { path: 'movies/:id', component: EditMovieComponent },
   { path: 'home', component: HomeComponent },
   { path: 'counter', component: CounterComponent },
   { path: 'fetch-data', component: FetchDataComponent },

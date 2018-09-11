@@ -2,7 +2,7 @@ import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
 import { Observable, of } from 'rxjs';
 import { Movie } from '../models/movie';
-import { catchError, map, tap } from 'rxjs/operators';
+import { catchError, map, tap, retry } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
@@ -16,12 +16,25 @@ export class MoviesService {
   getMovies(): Observable<Movie[]> {
     return this.http.get<Movie[]>(this.baseUrl + '/api/movies');        
   }
-
+  getMovie(id): Observable<Movie> {
+    return this.http.get<Movie>('/api/movies/'+id)
+  }
   createMovie(movie: Movie) : Observable<Movie> {
     return this.http.post<Movie>('/api/movies', movie).pipe(
-      tap((movie: Movie) => this.log(`added movie with id=${movie.id}`)),
-      catchError(this.handleError<Movie>('createMovie'))
+      //tap((movie: Movie) => this.log(`added movie with id=${movie.id}`))
+      //, catchError(this.handleError<Movie>('createMovie')      )
     )
+  }
+
+  updateMovie(movie: Movie): Observable<Movie> {
+    return this.http.put<Movie>('/api/movies/' + movie.id, movie)
+    //  .pipe(
+    //  tap((movie:Movie)=>this.log(`update movie with id: ${movie.id}`))
+    //)
+  }
+
+  deleteMovie(id): Observable<any> {
+    return this.http.delete('/api/movies/'+id)
   }
 
   /**
