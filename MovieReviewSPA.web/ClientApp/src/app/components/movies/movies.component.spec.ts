@@ -1,5 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { RouterTestingModule } from '@angular/router/testing'
+import { HttpClientTestingModule } from '@angular/common/http/testing'
+import { ToastrService, ToastrModule } from 'ngx-toastr';
 import { MoviesComponent } from './movies.component';
 
 describe('MoviesComponent', () => {
@@ -8,7 +10,9 @@ describe('MoviesComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MoviesComponent ]
+      imports:[RouterTestingModule,HttpClientTestingModule,ToastrModule.forRoot()],
+      declarations: [MoviesComponent],
+      providers: [{provide:'BASE_URL',useValue:''},ToastrService]
     })
     .compileComponents();
   }));
