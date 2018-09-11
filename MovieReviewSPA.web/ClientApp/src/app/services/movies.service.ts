@@ -3,13 +3,15 @@ import { HttpClient } from '@angular/common/http'
 import { Observable, of } from 'rxjs';
 import { Movie } from '../models/movie';
 import { catchError, map, tap } from 'rxjs/operators';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MoviesService {
 
-  constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string) { }
+  constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string,
+    private toastr: ToastrService) { }
 
   getMovies(): Observable<Movie[]> {
     return this.http.get<Movie[]>(this.baseUrl + '/api/movies');        
@@ -44,6 +46,7 @@ export class MoviesService {
 
   /** Log a HeroService message with the MessageService */
   private log(message: string) {
+    this.toastr.error(message, 'ERROR', { closeButton: true, timeOut:30000 });
     console.log(`MoviesService: ${message}`);
   }
 }

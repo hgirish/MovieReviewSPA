@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Net.Http;
 using Microsoft.AspNetCore.Mvc;
 using MovieReviewSPA.Data.Contracts;
@@ -44,6 +45,7 @@ namespace MovieReviewSPA.web.Controllers.API
         [HttpPost]
         public IActionResult Post([FromBody] Movie movie)
         {
+            throw new Exception("Some Exception");
            movie = _uow.Movies.Add(movie);
             _uow.Commit();
             return Ok(movie);

@@ -26,9 +26,19 @@ export class NewMovieComponent implements OnInit {
     formData.releaseYear = this.movie.releaseYear.toString();
     console.log(formData);
     this.moviesService.createMovie(formData)
-      .subscribe(x => console.log(x));
-    this.toastr.success('movie added')
-    this.router.navigate(['/movies'])
+      .subscribe((movie: Movie) => {
+        console.log(movie);
+        if (movie) {
+          this.toastr.success(`movie added: ${movie.id}`)
+          this.router.navigate(['/movies'])
+        } else {
+          this.toastr.error('ERROR occured ')
+        }
+      }, err => {
+        this.toastr.error(`An unexpected error occured while creating new movie! ${err}`,'Error')
+      });
+   
+    
 
   }
 
