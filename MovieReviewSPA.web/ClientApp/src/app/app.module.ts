@@ -14,7 +14,10 @@ import { AppRoutingModule } from './/app-routing.module';
 import { NewMovieComponent } from './components/new-movie/new-movie.component';
 import { ToastrModule } from 'ngx-toastr'
 import * as Raven from 'raven-js';
-import { EditMovieComponent } from './components/edit-movie/edit-movie.component'
+import { EditMovieComponent } from './components/edit-movie/edit-movie.component';
+import { ReviewsComponent } from './components/reviews/reviews.component';
+import { NewReviewComponent } from './components/new-review/new-review.component';
+import { EditReviewComponent } from './components/edit-review/edit-review.component';
 
 Raven
   .config('https://c5c060c5de2548d3a53e66a23e7a75ed@sentry.io/1278862')
@@ -25,7 +28,11 @@ export class RavenErrorHandler implements ErrorHandler {
     Raven.captureException(err);
   }
 }
-
+export class ConsoleErrorHandler implements ErrorHandler {
+  handleError(err: any): void {
+    console.error(err);
+  }
+}
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,7 +43,9 @@ export class RavenErrorHandler implements ErrorHandler {
     MoviesComponent,
     NewMovieComponent,
     EditMovieComponent,
-    
+    ReviewsComponent,
+    NewReviewComponent,
+    EditReviewComponent,    
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -47,7 +56,7 @@ export class RavenErrorHandler implements ErrorHandler {
     AppRoutingModule
   ],
   providers: [
-   // { provide: ErrorHandler, useClass: RavenErrorHandler }
+    { provide: ErrorHandler, useClass: ConsoleErrorHandler }
   ],
   bootstrap: [AppComponent]
 })

@@ -60,13 +60,13 @@ namespace MovieReviewSPA.web.Controllers.API
         // Create a new review
         // POST /api/MovieReviews
         [HttpPost("{id}")]
-        public int Post(int Id, [FromBody]MovieReview review)
+        public IActionResult Post(int Id, [FromBody]MovieReview review)
         {
             review.MovieId = Id;
             _uOW.MovieReviews.Add(review);
             _uOW.Commit();
 
-            return Response.StatusCode = (int)HttpStatusCode.Created;
+            return Ok(review);
         }
 
         //Delete a review

@@ -7,16 +7,22 @@ import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { NewMovieComponent } from './components/new-movie/new-movie.component';
 import { EditMovieComponent } from './components/edit-movie/edit-movie.component';
+import { ReviewsComponent } from './components/reviews/reviews.component';
+import { NewReviewComponent } from './components/new-review/new-review.component';
+import { EditReviewComponent } from './components/edit-review/edit-review.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: '', redirectTo: 'movies', pathMatch: 'full' },
   { path: 'movies', component: MoviesComponent },
   { path: 'movies/new', component: NewMovieComponent },
   { path: 'movies/:id', component: EditMovieComponent },
+  { path: 'reviews/:id', component: ReviewsComponent },
+  { path: 'reviews/new/:id', component: NewReviewComponent },
+  { path: 'reviews/edit/:id', component:EditReviewComponent },
   { path: 'home', component: HomeComponent },
   { path: 'counter', component: CounterComponent },
   { path: 'fetch-data', component: FetchDataComponent },
-  { path: '**', redirectTo: 'home' }
+  { path: '**', redirectTo: 'movies' }
 ]
 
 @NgModule({
