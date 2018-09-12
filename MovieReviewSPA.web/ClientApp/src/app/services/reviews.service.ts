@@ -7,15 +7,30 @@ import { Review } from '../models/review';
   providedIn: 'root'
 })
 export class ReviewsService {
+    
 
   constructor(private http: HttpClient) { }
 
-  getReviewById(id) {
-    return this.http.get<Review[]>('/api/moviereviews/' + id);
+  getReviewsByMovieId(movieId):Observable<Review[]> {
+    return this.http.get<Review[]>('/api/moviereviews/' + movieId);
+  }
+
+  getReviewById(id) : Observable<Review> {
+    return this.http.get<Review>('/api/moviereviews/GetByReviewId/' + id)
   }
 
   createReview(movieId:number,review: Review) : Observable<Review> {
     return this.http.post<Review>('/api/moviereviews/'+movieId, review);
 
   }
+
+  updateReview(review: Review): Observable<any> {
+    return this.http.put('/api/moviereviews/',review);
+  }
+
+  deleteReview(id: int): Observable<any> {
+    return this.http.delete('/api/moviereviews/' + id);
+  }
+
+  
 }

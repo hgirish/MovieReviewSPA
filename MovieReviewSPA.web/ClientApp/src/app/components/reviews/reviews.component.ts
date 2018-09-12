@@ -28,7 +28,7 @@ export class ReviewsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.reviewsService.getReviewById(this.review.movieId)
+    this.reviewsService.getReviewsByMovieId(this.review.movieId)
       .subscribe(reviews => {
         this.reviews = reviews;
         console.log("Reviews: " , this.reviews)
@@ -46,6 +46,19 @@ export class ReviewsComponent implements OnInit {
           if (err.status === 404) {
             this.router.navigate(['/movies']);
           }
+        })
+    }
+  }
+
+  delete(id) {
+    if (confirm("Are you sure, you want to delete this review?")) {
+      this.reviewsService.deleteReview(id).
+        subscribe(x => {
+          this.reviews = this.reviews.filter(m => m.id !== id)
+          this.toastr.success("Review deleted", "Success", { timeOut: 5000, closeButton: true })
+          //this.router.navigate(['/movies'])
+        }, err => {
+          this.toastr.error("An unexpected error while deleting the review", "ERROR", { closeButton: true, timeOut:10000 })
         })
     }
   }
