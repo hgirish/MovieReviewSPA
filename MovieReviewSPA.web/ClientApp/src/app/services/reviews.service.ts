@@ -28,7 +28,7 @@ export class ReviewsService {
     return this.http.put('/api/moviereviews/',review);
   }
 
-  deleteReview(id: int): Observable<any> {
+  deleteReview(id: number): Observable<any> {
     return this.http.delete('/api/moviereviews/' + id);
   }
 

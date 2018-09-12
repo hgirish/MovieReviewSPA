@@ -1,6 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ReviewsComponent } from './reviews.component';
+import { RouterTestingModule } from '@angular/router/testing';
+import { FormsModule } from '@angular/forms';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { ToastrModule } from 'ngx-toastr';
 
 describe('ReviewsComponent', () => {
   let component: ReviewsComponent;
@@ -8,7 +12,9 @@ describe('ReviewsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ReviewsComponent ]
+      declarations: [ReviewsComponent],
+      imports: [RouterTestingModule, FormsModule, HttpClientTestingModule,ToastrModule.forRoot()],
+      providers: [{provide:'BASE_URL',useValue:''}]
     })
     .compileComponents();
   }));

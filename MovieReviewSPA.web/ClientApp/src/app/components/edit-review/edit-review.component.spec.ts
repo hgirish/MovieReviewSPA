@@ -1,6 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { EditReviewComponent } from './edit-review.component';
+import { FormsModule } from '@angular/forms';
+import { RouterTestingModule } from '@angular/router/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { ToastrModule } from 'ngx-toastr';
 
 describe('EditReviewComponent', () => {
   let component: EditReviewComponent;
@@ -8,7 +12,9 @@ describe('EditReviewComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EditReviewComponent ]
+      declarations: [EditReviewComponent],
+      imports: [FormsModule, RouterTestingModule,HttpClientTestingModule,ToastrModule.forRoot()],
+      providers:[]
     })
     .compileComponents();
   }));
