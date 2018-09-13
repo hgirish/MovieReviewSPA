@@ -18,7 +18,9 @@ export class ReviewsService {
   getReviewById(id) : Observable<Review> {
     return this.http.get<Review>('/api/moviereviews/GetByReviewId/' + id)
   }
-
+  getRatings(id): Observable<number[]> {
+    return this.http.get<number[]>('/api/moviereviews/GetRatings/' + id)
+  }
   createReview(movieId:number,review: Review) : Observable<Review> {
     return this.http.post<Review>('/api/moviereviews/'+movieId, review);
 

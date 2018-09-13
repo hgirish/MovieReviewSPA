@@ -1,0 +1,59 @@
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Movie } from '../../models/movie';
+import { ActivatedRoute, Router } from '@angular/router';
+import { MoviesService } from '../../services/movies.service';
+import { ToastrService } from 'ngx-toastr';
+
+
+@Component({
+  selector: 'app-detail-view',
+  templateUrl: './detail-view.component.html',
+  styleUrls: ['./detail-view.component.css']
+})
+export class DetailViewComponent implements OnInit {
+  @ViewChild('fileInput') fileInput: ElementRef;
+  movie: Movie = new Movie();
+  photos: any[];
+
+  constructor(private route: ActivatedRoute,
+    private router: Router,
+    private moviesService: MoviesService,
+    private toastr: ToastrService
+  ) {
+    route.params.subscribe(p => {
+      this.movie.id = +p['id'];
+    });
+  }
+
+  ngOnInit() {
+    if (this.movie.id) {
+      this.moviesService.getMovie(this.movie.id)
+        .subscribe(m => {
+          this.movie = m;
+          console.log("Movie: ", this.movie)
+        },
+        err => {
+          if (err.status === 404) {
+            this.router.navigate(['/']);
+          }
+        })
+    }
+  }
+
+  onSubmit() {
+    if (this.movie.id) {
+      this.moviesService.updateMovie(this.movie)
+        .subscribe(x => {
+          console.log(x);
+          this.toastr.success('Movie updated', "Success", {
+            closeButton: true, timeOut: 5000
+          });
+          this.router.navigate(['/movies']);
+        }, err => {
+          this.toastr.error('An unexpected error while updating the record!',
+            'ERROR', { closeButton: true, timeOut:10000 })
+        })
+    }
+  }
+
+}

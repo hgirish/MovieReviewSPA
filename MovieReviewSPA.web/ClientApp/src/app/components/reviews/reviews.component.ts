@@ -17,6 +17,7 @@ export class ReviewsComponent implements OnInit {
   movie: Movie = new Movie();
   review: Review = new Review();
   filter: any = {};
+  ratings: number[]
 
   constructor(private reviewsService: ReviewsService,
     private moviesService: MoviesService,
@@ -33,6 +34,10 @@ export class ReviewsComponent implements OnInit {
       .subscribe(reviews => {
         this.reviews = this.allReviews = reviews;
         console.log("Reviews: " , this.reviews)
+      })
+    this.reviewsService.getRatings(this.review.movieId)
+      .subscribe(ratings => {
+        this.ratings = ratings;
       })
     if (this.review.movieId) {
       this.moviesService.getMovie(this.review.movieId)

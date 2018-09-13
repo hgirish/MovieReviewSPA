@@ -9,7 +9,7 @@
         <label for="reviewerRating">Filter Reviews by Rating</label>
         <select id="reviewerRating" class="form-control" [(ngModel)]="filter.reviewerRating" (change)="onDropdownChange()">
             <option value=""></option>
-            <option *ngFor="let r of reviews" value="{{r.reviewerRating}}">{{r.reviewerRating}}</option>
+            <option *ngFor="let r of ratings" value="{{r}}">{{r}}</option>
         </select>
     </div>
     <button class="btn btn-danger" (click)="onResetFilter()">Reset</button>

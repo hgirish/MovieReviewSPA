@@ -11,21 +11,21 @@ import { config } from 'rxjs';
 })
 export class MoviesComponent implements OnInit {
   movie: Movie = new Movie();
-  allMovies:Movie[]
+  allMovies: Movie[]
   movies: Movie[]
   totalMovies = 0;
   filter: any = {}
   query: any = {
     pageSize: 3,
-    allMovies:10
+    allMovies: 10
   }
-  constructor(private moviesService: MoviesService, private toastr:ToastrService) { }
+  constructor(private moviesService: MoviesService, private toastr: ToastrService) { }
 
   ngOnInit() {
     this.moviesService.getMovies(this.query).subscribe(movies => {
       this.movies = this.allMovies = movies;
-    //  this.toastr.success(`Fetched ${movies.length} movies.`)
-     // console.log("Movies: ", this.movies);
+      //  this.toastr.success(`Fetched ${movies.length} movies.`)
+      // console.log("Movies: ", this.movies);
     })
 
     this.moviesService.getMoviesCount().subscribe(movies => {
@@ -35,14 +35,14 @@ export class MoviesComponent implements OnInit {
   }
 
   onDropdownChange() {
-   
+
     var movies = this.allMovies;
     if (this.filter.id) {
-    
+
       movies = movies.filter(m => m.id === +this.filter.id);
-     
+
     }
-    this.movies= movies;
+    this.movies = movies;
   }
 
   onResetFilter() {
@@ -57,16 +57,16 @@ export class MoviesComponent implements OnInit {
           this.movies = this.movies.filter(m => m.id !== id)
           this.toastr.success('Movie Deleted', 'SUCCESS', {
             timeOut: 5000,
-            closeButton:true
+            closeButton: true
           })
         },
-        err => {
-          this.toastr.error('An unexpected error while deleting the record',
-            'ERROR',
-            { timeOut: 30000, closeButton: true })
-        }
+          err => {
+            this.toastr.error('An unexpected error while deleting the record',
+              'ERROR',
+              { timeOut: 30000, closeButton: true })
+          }
         )
-      
+
     }
   }
 

@@ -1,4 +1,4 @@
-import { Component,  OnChanges, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnChanges, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'pager',
@@ -6,8 +6,8 @@ import { Component,  OnChanges, Input, Output, EventEmitter } from '@angular/cor
   styleUrls: ['./pagination.component.css']
 })
 export class PaginationComponent implements OnChanges {
-  @Input('total-items') totalItems;
-  @Input('page-size') pageSize = 10;
+  @Input('total-items') totalItems:number;
+  @Input('page-size') pageSize:number = 10;
   @Output('page-changed') pageChanged = new EventEmitter();
   @Output('total-items') totalNoOfPages;
   pages: any[];
@@ -44,13 +44,13 @@ export class PaginationComponent implements OnChanges {
 
   next() {
     if (this.currentPage === this.pages.length) {
-      return 
+      return
     }
     this.currentPage++;
     console.log("next", this);
     this.pageChanged.emit(this.currentPage);
   }
 
- 
+
 
 }
