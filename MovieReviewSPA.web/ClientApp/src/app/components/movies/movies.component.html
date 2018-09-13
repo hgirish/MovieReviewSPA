@@ -1,4 +1,19 @@
+<p>
+  <a [routerLink]="['/movies/new']" class="btn btn-primary">Create new Movie</a>
+</p>
+<div class="well">
+  <div class="form-group">
+    <label for="movie">Filter Movie</label>
+    <select id="movie" class="form-control" [(ngModel)]="filter.id"
+            (change)="onDropdownChange()">
+      <option value=""></option>
+      <option *ngFor="let m of movies" value="{{m.id}}">{{m.movieName}}</option>
+    </select>
+  </div>
+  <button class="btn btn-danger" (click)="onResetFilter()">Reset</button>
+</div>
 <h3>Movies List</h3>
+<form>
 <div class="container">
   <div class="row">
     <div class="row">
@@ -29,3 +44,6 @@
     </div>
   </div>
 </div>
+  </form>
+
+<pager [total-items]="totalMovies" [page-size]="3" (page-changed)="onPageChange($event)"></pager>

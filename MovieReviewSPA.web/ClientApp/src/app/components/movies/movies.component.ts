@@ -10,16 +10,44 @@ import { config } from 'rxjs';
   styleUrls: ['./movies.component.css']
 })
 export class MoviesComponent implements OnInit {
-  movie: Movie
+  movie: Movie = new Movie();
+  allMovies:Movie[]
   movies: Movie[]
+  totalMovies = 0;
+  filter: any = {}
+  query: any = {
+    pageSize: 3,
+    allMovies:10
+  }
   constructor(private moviesService: MoviesService, private toastr:ToastrService) { }
 
   ngOnInit() {
-    this.moviesService.getMovies().subscribe(movies => {
-      this.movies = movies;
+    this.moviesService.getMovies(this.query).subscribe(movies => {
+      this.movies = this.allMovies = movies;
     //  this.toastr.success(`Fetched ${movies.length} movies.`)
      // console.log("Movies: ", this.movies);
     })
+
+    this.moviesService.getMoviesCount().subscribe(movies => {
+      this.totalMovies = movies.length;
+      console.log("Total Movies: ", this.totalMovies);
+    })
+  }
+
+  onDropdownChange() {
+   
+    var movies = this.allMovies;
+    if (this.filter.id) {
+    
+      movies = movies.filter(m => m.id === +this.filter.id);
+     
+    }
+    this.movies= movies;
+  }
+
+  onResetFilter() {
+    this.filter = {};
+    this.onDropdownChange();
   }
 
   delete(id) {
@@ -40,5 +68,16 @@ export class MoviesComponent implements OnInit {
         )
       
     }
+  }
+
+  private populateMovies() {
+    this.moviesService.getMovies(this.query).subscribe(result => {
+      this.movies = result;
+    })
+  }
+
+  onPageChange(page) {
+    this.query.page = page;
+    this.populateMovies();
   }
 }

@@ -13,6 +13,7 @@ import { MoviesService } from '../../services/movies.service';
 })
 export class ReviewsComponent implements OnInit {
   reviews: Review[];
+  allReviews: Review[];
   movie: Movie = new Movie();
   review: Review = new Review();
   filter: any = {};
@@ -30,7 +31,7 @@ export class ReviewsComponent implements OnInit {
   ngOnInit() {
     this.reviewsService.getReviewsByMovieId(this.review.movieId)
       .subscribe(reviews => {
-        this.reviews = reviews;
+        this.reviews = this.allReviews = reviews;
         console.log("Reviews: " , this.reviews)
       })
     if (this.review.movieId) {
@@ -61,6 +62,17 @@ export class ReviewsComponent implements OnInit {
           this.toastr.error("An unexpected error while deleting the review", "ERROR", { closeButton: true, timeOut:10000 })
         })
     }
+  }
+  onDropdownChange() {
+    var reviews = this.allReviews;
+    if (this.filter.reviewerRating) {
+      reviews = reviews.filter(r => r.reviewerRating == +this.filter.reviewerRating);
+    }
+    this.reviews = reviews;
+  }
+  onResetFilter() {
+    this.filter = {};
+    this.onDropdownChange();
   }
 
 }

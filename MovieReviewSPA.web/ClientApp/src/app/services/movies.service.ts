@@ -13,8 +13,11 @@ export class MoviesService {
   constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string,
     private toastr: ToastrService) { }
 
-  getMovies(): Observable<Movie[]> {
-    return this.http.get<Movie[]>(this.baseUrl + '/api/movies');        
+  getMovies(filter): Observable<Movie[]> {
+    return this.http.get<Movie[]>(this.baseUrl + '/api/movies/?'+this.toQueryString(filter));        
+  }
+  getMoviesCount():Observable<Movie[]> {
+    return this.http.get<Movie[]>(this.baseUrl + '/api/movies');
   }
   getMovie(id): Observable<Movie> {
     return this.http.get<Movie>('/api/movies/'+id)
@@ -37,6 +40,17 @@ export class MoviesService {
     return this.http.delete('/api/movies/'+id)
   }
 
+  toQueryString(obj) {
+    var parts = [];
+    
+    for (var property in obj) {
+      var value = obj[property];
+      if (value !== null && value !== undefined) {
+        parts.push(encodeURIComponent(property) + '=' + encodeURIComponent(value));
+      }
+    }
+    return parts.join('&');
+  }
   /**
    * Handle Http operation that failed.
    * Let the app continue.

@@ -18,6 +18,7 @@ import { EditMovieComponent } from './components/edit-movie/edit-movie.component
 import { ReviewsComponent } from './components/reviews/reviews.component';
 import { NewReviewComponent } from './components/new-review/new-review.component';
 import { EditReviewComponent } from './components/edit-review/edit-review.component';
+import { PaginationComponent } from './utilities/pagination/pagination.component';
 
 Raven
   .config('https://c5c060c5de2548d3a53e66a23e7a75ed@sentry.io/1278862')
@@ -45,7 +46,8 @@ export class ConsoleErrorHandler implements ErrorHandler {
     EditMovieComponent,
     ReviewsComponent,
     NewReviewComponent,
-    EditReviewComponent,    
+    EditReviewComponent,
+    PaginationComponent,    
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

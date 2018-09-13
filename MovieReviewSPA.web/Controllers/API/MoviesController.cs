@@ -19,9 +19,9 @@ namespace MovieReviewSPA.web.Controllers.API
         }
         // GET: api/Movies
         [HttpGet]
-        public IQueryable Get()
+        public IQueryable Get(Pager movieQuery)
         {
-            var model = _uow.Movies.GetAll()
+            var model = _uow.Movies.GetAll(movieQuery)
                 .OrderByDescending(m => m.Reviews.Count())
                 .Select(m => new MovieViewModel
                 {
