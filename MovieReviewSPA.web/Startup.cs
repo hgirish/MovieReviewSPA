@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
@@ -9,6 +9,7 @@ using MovieReviewSPA.Data;
 using MovieReviewSPA.Data.Contracts;
 using MovieReviewSPA.Data.Helpers;
 using MovieReviewSPA.Data.SampleData;
+using MovieReviewSPA.Model;
 
 namespace MovieReviewSPA.web
 {
@@ -41,6 +42,8 @@ namespace MovieReviewSPA.web
             services.AddScoped<RepositoryFactories, RepositoryFactories>();
             services.AddScoped<IRepositoryProvider, RepositoryProvider>();
             services.AddScoped<IMovieReviewUow, MovieReviewUow>();
+
+            services.Configure<ImageSettings>(Configuration.GetSection("ImageSettings"));
 
 
         }

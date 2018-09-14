@@ -3,6 +3,8 @@ import { Movie } from '../../models/movie';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MoviesService } from '../../services/movies.service';
 import { ToastrService } from 'ngx-toastr';
+import { ImagesService } from '../../services/images.service';
+import { Image } from '../../models/image';
 
 
 @Component({
@@ -14,10 +16,12 @@ export class DetailViewComponent implements OnInit {
   @ViewChild('fileInput') fileInput: ElementRef;
   movie: Movie = new Movie();
   photos: any[];
+  images: Image[];
 
   constructor(private route: ActivatedRoute,
     private router: Router,
     private moviesService: MoviesService,
+    private imagesService: ImagesService,
     private toastr: ToastrService
   ) {
     route.params.subscribe(p => {
@@ -37,6 +41,12 @@ export class DetailViewComponent implements OnInit {
             this.router.navigate(['/']);
           }
         })
+      this.imagesService.getImages(this.movie.id)
+        .subscribe(images => {
+          console.log('Images: ', images);
+          this.images = images;
+        })
+
     }
   }
 
@@ -54,6 +64,18 @@ export class DetailViewComponent implements OnInit {
             'ERROR', { closeButton: true, timeOut:10000 })
         })
     }
+  }
+
+  uploadImage() {
+    var nativeElement: HTMLInputElement = this.fileInput.nativeElement;
+    this.imagesService.upload(this.movie.id, nativeElement.files[0]).subscribe(
+      
+      image => {
+        console.log("Image", image);
+        this.photos.push(image);
+      }
+    );
+    this.toastr.success('Image uploaded', 'Success', { closeButton: true, timeOut:5000 })
   }
 
 }

@@ -65,9 +65,9 @@ namespace MovieReviewSPA.web.Controllers.API
 
         //Fetch photos based on movieId
         [HttpGet]
-        public IQueryable<Image>[] Get(int id)
+        public Image[] Get(int id)
         {
-            IQueryable<Image>[] images = new[] { _uow.Images.GetAll().Where(m => m.MovieId == id) };
+            Image[] images =  _uow.Images.GetAll().Where(m => m.MovieId == id).ToArray() ;
             if (images != null) return images;
             throw new Exception(new HttpResponseMessage(HttpStatusCode.NotFound).ToString());
         }
