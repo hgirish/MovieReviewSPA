@@ -1,5 +1,4 @@
 <h1>Movie</h1>
-
 <div>
   <!-- Nav tabs -->
   <ul class="nav nav-tabs" role="tablist">
@@ -24,8 +23,7 @@
     <!-- Photos tab -->
     <div role="tabpanel" class="tab-pane" id="photos">
       <h2>Movie Pics</h2>
-
-      <input type="file" (change)="uploadImage()" #fileInput />
+      <input type="file"  onclick="this.value = null" (change)="uploadImage($event)" #fileInput />
       <img *ngFor="let image of images" src="/uploads/{{image.fileName}}" class="img-thumbnail" style="width:200px;height:200px;" />
       <div *ngIf="showHide" id="loader" style="display: block" align="center">
         <button class="btn btn-danger btn-lg"><i class="fa fa-refresh fa-spin"></i> Loading Images</button>

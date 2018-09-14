@@ -6,7 +6,6 @@ import { ToastrService } from 'ngx-toastr';
 import { ImagesService } from '../../services/images.service';
 import { Image } from '../../models/image';
 
-
 @Component({
   selector: 'app-detail-view',
   templateUrl: './detail-view.component.html',
@@ -63,11 +62,11 @@ export class DetailViewComponent implements OnInit {
     }
   }
 
-  uploadImage() {
+  uploadImage(event: any) {
+    console.log("event: ", event);
     var nativeElement: HTMLInputElement = this.fileInput.nativeElement;
-    this.imagesService.upload(this.movie.id, nativeElement.files[0]).subscribe(
-      
-      image => {
+    this.imagesService.upload(this.movie.id, nativeElement.files[0])
+      .subscribe(image => {
         this.photos.push(image);
       }
     );

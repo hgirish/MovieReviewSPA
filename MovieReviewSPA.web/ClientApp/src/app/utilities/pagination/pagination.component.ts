@@ -13,8 +13,6 @@ export class PaginationComponent implements OnChanges {
   pages: any[];
   currentPage = 1;
 
-
-
   constructor() { }
 
   ngOnChanges() {

@@ -19,7 +19,8 @@ namespace MovieReviewSPA.web.Controllers.API
             _uow = uow;
         }
         // GET: api/Movies
-        [HttpGet][Authorize]
+        [HttpGet]
+        //[Authorize]
         public IQueryable Get(Pager movieQuery)
         {
             var model = _uow.Movies.GetAll(movieQuery)
