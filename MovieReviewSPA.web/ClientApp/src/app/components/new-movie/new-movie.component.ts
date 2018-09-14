@@ -24,10 +24,8 @@ export class NewMovieComponent implements OnInit {
     formData.movieName = this.movie.movieName.toString();
     formData.directorName = this.movie.directorName.toString();
     formData.releaseYear = this.movie.releaseYear.toString();
-    console.log(formData);
     this.moviesService.createMovie(formData)
       .subscribe((movie: Movie) => {
-        console.log(movie);
         if (movie) {
           this.toastr.success(`movie added: ${movie.id}`)
           this.router.navigate(['/movies'])

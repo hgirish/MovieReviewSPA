@@ -74,6 +74,5 @@ export class MoviesService {
   /** Log a HeroService message with the MessageService */
   private log(message: string) {
     this.toastr.error(message, 'ERROR', { closeButton: true, timeOut:30000 });
-    console.log(`MoviesService: ${message}`);
   }
 }

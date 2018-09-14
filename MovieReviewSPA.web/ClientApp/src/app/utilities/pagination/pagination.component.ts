@@ -26,7 +26,6 @@ export class PaginationComponent implements OnChanges {
       this.pages.push(i);
     }
 
-    console.log(this);
   }
 
   changePage(page) {
@@ -47,7 +46,6 @@ export class PaginationComponent implements OnChanges {
       return
     }
     this.currentPage++;
-    console.log("next", this);
     this.pageChanged.emit(this.currentPage);
   }
 

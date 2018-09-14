@@ -25,7 +25,6 @@ export class EditReviewComponent implements OnInit {
       this.reviewsService.getReviewById(this.review.id)
         .subscribe(m => {
           this.review = m;
-          console.log("Review: ", this.review);
         }, err => {
           if (err.status === 404) {
             this.router.navigate(['/movies'])
@@ -38,7 +37,6 @@ export class EditReviewComponent implements OnInit {
     if (this.review.id) {
       this.reviewsService.updateReview(this.review)
         .subscribe(x => {
-          console.log(x);
           this.toastr.success('Review Updated', 'Success', { timeOut: 5000, closeButton: true });
           this.router.navigate(['/movies'])
         }, err => {

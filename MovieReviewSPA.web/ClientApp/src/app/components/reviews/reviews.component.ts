@@ -33,7 +33,6 @@ export class ReviewsComponent implements OnInit {
     this.reviewsService.getReviewsByMovieId(this.review.movieId)
       .subscribe(reviews => {
         this.reviews = this.allReviews = reviews;
-        console.log("Reviews: " , this.reviews)
       })
     this.reviewsService.getRatings(this.review.movieId)
       .subscribe(ratings => {

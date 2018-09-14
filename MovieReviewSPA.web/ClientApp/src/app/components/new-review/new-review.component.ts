@@ -46,11 +46,9 @@ export class NewReviewComponent implements OnInit {
     formData.reviewerName = this.review.reviewerName.toString();
     formData.reviewerComments = this.review.reviewerComments.toString();
     formData.reviewerRating = this.review.reviewerRating;
-    formData.movieId = this.review.movieId; console.log(formData);
-    console.log(formData);
+    formData.movieId = this.review.movieId;
     this.reviewsService.createReview(this.review.movieId, formData)
       .subscribe(x => {
-        console.log(x);
         this.toastr.success('New review crated!', 'Success', {
           timeOut: 5000, closeButton:true
         })

@@ -24,13 +24,11 @@ export class MoviesComponent implements OnInit {
   ngOnInit() {
     this.moviesService.getMovies(this.query).subscribe(movies => {
       this.movies = this.allMovies = movies;
-      //  this.toastr.success(`Fetched ${movies.length} movies.`)
-      // console.log("Movies: ", this.movies);
+ 
     })
 
     this.moviesService.getMoviesCount().subscribe(movies => {
       this.totalMovies = movies.length;
-      console.log("Total Movies: ", this.totalMovies);
     })
   }
 

@@ -34,7 +34,6 @@ export class DetailViewComponent implements OnInit {
       this.moviesService.getMovie(this.movie.id)
         .subscribe(m => {
           this.movie = m;
-          console.log("Movie: ", this.movie)
         },
         err => {
           if (err.status === 404) {
@@ -43,7 +42,6 @@ export class DetailViewComponent implements OnInit {
         })
       this.imagesService.getImages(this.movie.id)
         .subscribe(images => {
-          console.log('Images: ', images);
           this.images = images;
         })
 
@@ -54,7 +52,6 @@ export class DetailViewComponent implements OnInit {
     if (this.movie.id) {
       this.moviesService.updateMovie(this.movie)
         .subscribe(x => {
-          console.log(x);
           this.toastr.success('Movie updated', "Success", {
             closeButton: true, timeOut: 5000
           });
@@ -71,7 +68,6 @@ export class DetailViewComponent implements OnInit {
     this.imagesService.upload(this.movie.id, nativeElement.files[0]).subscribe(
       
       image => {
-        console.log("Image", image);
         this.photos.push(image);
       }
     );
