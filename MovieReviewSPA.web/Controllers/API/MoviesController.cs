@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Net.Http;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MovieReviewSPA.Data.Contracts;
 using MovieReviewSPA.Model;
@@ -18,7 +19,7 @@ namespace MovieReviewSPA.web.Controllers.API
             _uow = uow;
         }
         // GET: api/Movies
-        [HttpGet]
+        [HttpGet][Authorize]
         public IQueryable Get(Pager movieQuery)
         {
             var model = _uow.Movies.GetAll(movieQuery)
