@@ -20,6 +20,8 @@ import { NewReviewComponent } from './components/new-review/new-review.component
 import { EditReviewComponent } from './components/edit-review/edit-review.component';
 import { PaginationComponent } from './utilities/pagination/pagination.component';
 import { DetailViewComponent } from './components/detail-view/detail-view.component';
+import { CallbackComponent } from './components/callback/callback.component';
+import { AuthService } from './auth/auth.service';
 
 Raven
   .config('https://c5c060c5de2548d3a53e66a23e7a75ed@sentry.io/1278862')
@@ -49,7 +51,8 @@ export class ConsoleErrorHandler implements ErrorHandler {
     NewReviewComponent,
     EditReviewComponent,
     PaginationComponent,
-    DetailViewComponent,    
+    DetailViewComponent,
+    CallbackComponent,    
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -60,7 +63,8 @@ export class ConsoleErrorHandler implements ErrorHandler {
     AppRoutingModule
   ],
   providers: [
-    { provide: ErrorHandler, useClass: ConsoleErrorHandler }
+    { provide: ErrorHandler, useClass: ConsoleErrorHandler },
+    AuthService
   ],
   bootstrap: [AppComponent]
 })

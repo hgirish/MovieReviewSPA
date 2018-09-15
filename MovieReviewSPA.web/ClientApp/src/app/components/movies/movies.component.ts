@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Movie } from '../../models/movie';
 import { MoviesService } from '../../services/movies.service';
 import { ToastrService } from 'ngx-toastr';
-import { config } from 'rxjs';
+
 
 @Component({
   selector: 'app-movies',

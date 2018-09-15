@@ -14,8 +14,8 @@ import { Image } from '../../models/image';
 export class DetailViewComponent implements OnInit {
   @ViewChild('fileInput') fileInput: ElementRef;
   movie: Movie = new Movie();
-  photos: any[];
-  images: Image[];
+  photos: Image[] =new Array<Image>();
+  images: Image[] = new Array<Image>();
 
   constructor(private route: ActivatedRoute,
     private router: Router,
@@ -66,11 +66,12 @@ export class DetailViewComponent implements OnInit {
     console.log("event: ", event);
     var nativeElement: HTMLInputElement = this.fileInput.nativeElement;
     this.imagesService.upload(this.movie.id, nativeElement.files[0])
-      .subscribe(image => {
-        this.photos.push(image);
+      .subscribe((image: Image) => {
+        this.images.push(image);
+        this.toastr.success('Image uploaded', 'Success', { closeButton: true, timeOut: 5000 })
       }
     );
-    this.toastr.success('Image uploaded', 'Success', { closeButton: true, timeOut:5000 })
+   
   }
 
 }

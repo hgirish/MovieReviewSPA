@@ -18,6 +18,14 @@
             <span class='glyphicon glyphicon-home'></span> Home
           </a>
         </li>
+        <li [routerLinkActive]="['link-active']">
+          <a (click)="authService.login()" class="pointer" *ngIf="!authService.isAuthenticated()">
+            <span class="glyphicon glyphicon-user"></span> Login
+          </a>
+          <a (click)="authService.logout()" class="pointer" *ngIf="authService.isAuthenticated()">
+            <span class="glyphicon glyphicon-user"></span> Logout
+          </a> 
+        </li>
         <li [routerLinkActive]="['link-active']"  [routerLinkActiveOptions]='{ exact: true }'>
           <a [routerLink]="['/movies']">
             <span class="glyphicon glyphicon-film"></span> Movies
