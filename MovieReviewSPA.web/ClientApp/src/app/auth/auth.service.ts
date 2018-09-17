@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import * as auth0 from 'auth0-js';
 import { AUTH_CONFIG } from './auth0-variables';
 import { Router } from '@angular/router';
@@ -12,10 +12,10 @@ export class AuthService {
     clientID: AUTH_CONFIG.clientID,
     domain: AUTH_CONFIG.domain,
     responseType: 'token id_token',
-    redirectUri: AUTH_CONFIG.callbackURL
+    redirectUri: this.baseUrl + 'callback'
   });
   
-  constructor(public router: Router, private toastr: ToastrService) { }
+  constructor(public router: Router, private toastr: ToastrService, @Inject('BASE_URL') private baseUrl: string) { }
 
   public login(): void {
     this.auth.authorize();
